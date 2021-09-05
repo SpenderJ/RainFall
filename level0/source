@@ -1,0 +1,76 @@
+08048ec0 <main>:
+ 8048ec0:       55                      push   ebp
+ 8048ec1:       89 e5                   mov    ebp,esp
+ 8048ec3:       83 e4 f0                and    esp,0xfffffff0
+ 8048ec6:       83 ec 20                sub    esp,0x20
+ 8048ec9:       8b 45 0c                mov    eax,DWORD PTR [ebp+0xc]
+ 8048ecc:       83 c0 04                add    eax,0x4
+ 8048ecf:       8b 00                   mov    eax,DWORD PTR [eax]
+ 8048ed1:       89 04 24                mov    DWORD PTR [esp],eax
+ 8048ed4:       e8 37 08 00 00          call   8049710 <atoi>
+ 8048ed9:       3d a7 01 00 00          cmp    eax,0x1a7
+ 8048ede:       75 78                   jne    8048f58 <main+0x98>
+ 8048ee0:       c7 04 24 48 53 0c 08    mov    DWORD PTR [esp],0x80c5348
+ 8048ee7:       e8 04 7d 00 00          call   8050bf0 <__strdup>
+ 8048eec:       89 44 24 10             mov    DWORD PTR [esp+0x10],eax
+ 8048ef0:       c7 44 24 14 00 00 00    mov    DWORD PTR [esp+0x14],0x0
+ 8048ef7:       00
+ 8048ef8:       e8 83 b7 00 00          call   8054680 <__getegid>
+ 8048efd:       89 44 24 1c             mov    DWORD PTR [esp+0x1c],eax
+ 8048f01:       e8 6a b7 00 00          call   8054670 <__geteuid>
+ 8048f06:       89 44 24 18             mov    DWORD PTR [esp+0x18],eax
+ 8048f0a:       8b 44 24 1c             mov    eax,DWORD PTR [esp+0x1c]
+ 8048f0e:       89 44 24 08             mov    DWORD PTR [esp+0x8],eax
+ 8048f12:       8b 44 24 1c             mov    eax,DWORD PTR [esp+0x1c]
+ 8048f16:       89 44 24 04             mov    DWORD PTR [esp+0x4],eax
+ 8048f1a:       8b 44 24 1c             mov    eax,DWORD PTR [esp+0x1c]
+ 8048f1e:       89 04 24                mov    DWORD PTR [esp],eax
+ 8048f21:       e8 da b7 00 00          call   8054700 <__setresgid>
+ 8048f26:       8b 44 24 18             mov    eax,DWORD PTR [esp+0x18]
+ 8048f2a:       89 44 24 08             mov    DWORD PTR [esp+0x8],eax
+ 8048f2e:       8b 44 24 18             mov    eax,DWORD PTR [esp+0x18]
+ 8048f32:       89 44 24 04             mov    DWORD PTR [esp+0x4],eax
+ 8048f36:       8b 44 24 18             mov    eax,DWORD PTR [esp+0x18]
+ 8048f3a:       89 04 24                mov    DWORD PTR [esp],eax
+ 8048f3d:       e8 4e b7 00 00          call   8054690 <__setresuid>
+ 8048f42:       8d 44 24 10             lea    eax,[esp+0x10]
+ 8048e9e:       e8 fd ab 07 00          call   80c3aa0 <__register_frame 80b2c13:	8b 6c 24 40          	mov    0x40(%esp),%ebp
+ 80b2c17:	89 5c 24 44          	mov    %ebx,0x44(%esp)
+ 80b2c1b:	8b 5c 24 78          	mov    0x78(%esp),%ebx
+ 80b2c1f:	89 4c 24 40          	mov    %ecx,0x40(%esp)
+ 80b2c23:	0f b6 4c 24 58       	movzbl 0x58(%esp),%ecx
+ 80b2c28:	89 84 24 88 00 00 00 	mov    %eax,0x88(%esp)
+ 80b2c2f:	89 94 24 8c 00 00 00 	mov    %edx,0x8c(%esp)
+ 80b2c36:	66 90                	xchg   %ax,%ax
+ 80b2c38:	39 74 24 44          	cmp    %esi,0x44(%esp)
+ 80b2c3c:	7d 7a                	jge    80b2cb8 <____strtod_l_internal+0x848>
+ 80b2c3e:	83 7c 24 6c ff       	cmpl   $0xffffffff,0x6c(%esp)
+ 80b2c43:	89 6c 24 40          	mov    %ebp,0x40(%esp)
+ 80b2c47:	0f 84 93 0b 00 00    	je     80b37e0 <____strtod_l_internal+0x1370>
+ 80b2c4d:	b8 e8 ff ff ff       	mov    $0xffffffe8,%eax
+ 80b2c52:	65 8b 15 00 00 00 00 	mov    %gs:0x0,%edx
+ 80b2c59:	c7 04 02 22 00 00 00 	movl   $0x22,(%edx,%eax,1)
+ 80b2c60:	8b 84 24 80 00 00 00 	mov    0x80(%esp),%eax
+ 80b2c67:	85 c0                	test   %eax,%eax
+ 80b2c69:	0f 84 2a 18 00 00    	je     80b4499 <____strtod_l_internal+0x2029>
+ 80b2c6f:	8b 44 24 70          	mov    0x70(%esp),%eax
+ 80b2c73:	d9 ee                	fldz
+ 80b2c75:	85 c0                	test   %eax,%eax
+ 80b2c77:	0f 84 05 17 00 00    	je     80b4382 <____strtod_l_internal+0x1f12>
+ 80b2c7d:	8b 44 24 40          	mov    0x40(%esp),%eax
+ 80b2c81:	d9 e0                	fchs
+ 80b2c83:	83 c0 01             	add    $0x1,%eax
+ 80b2c86:	0f b6 10             	movzbl (%eax),%edx
+ 80b2c89:	83 ea 30             	sub    $0x30,%edx
+ 80b2c8c:	80 fa 09             	cmp    $0x9,%dl
+ 80b2c8f:	76 f2                	jbe    80b2c83 <____strtod_l_internal+0x813>
+ 80b2c91:	8b ac 24 04 02 00 00 	mov    0x204(%esp),%ebp
+ 80b2c98:	89 44 24 40          	mov    %eax,0x40(%esp)
+ 80b2c9c:	85 ed                	test   %ebp,%ebp
+ 80b2c9e:	0f 84 0c fd ff ff    	je     80b29b0 <____strtod_l_internal+0x540>
+ 80b2ca4:	8b 9c 24 04 02 00 00 	mov    0x204(%esp),%ebx
+ 80b2cab:	89 03                	mov    %eax,(%ebx)
+ 80b2cad:	e9 fe fc ff ff       	jmp    80b29b0 <____strtod_l_internal+0x540>
+ 80b2cb2:	8d b6 00 00 00 00    	lea    0x0(%esi),%esi
+ 80b2cb8:	7f 0a                	jg     80b2cc4 <____strtod_l_internal+0x854>
+ 80b2cba:^C	39 5c 24 40          	cmp    %ebx,0x40(%esp)
