@@ -1,0 +1,9 @@
+08048480 <main>:
+ 8048480:	55                   	push   ebp
+ 8048481:	89 e5                	mov    ebp,esp
+ 8048483:	83 e4 f0             	and    esp,0xfffffff0
+ 8048486:	83 ec 50             	sub    esp,0x50
+ 8048489:	8d 44 24 10          	lea    eax,[esp+0x10]
+ 804848d:	89 04 24             	mov    DWORD PTR [esp],eax
+ 8048490:	e8 ab fe ff ff       	call   8048340 <gets@plt>
+ 8048495:	c9                   	leave
