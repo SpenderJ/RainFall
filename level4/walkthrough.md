@@ -20,9 +20,7 @@ Qui elle même appelle printf, qui peut être exploitée.
  804848d:	a1 10 98 04 08       	mov    eax,ds:0x8049810
  8048492:	3d 44 55 02 01       	cmp    eax,0x1025544
 ```
-This part is intersting, it makes a comparison, in case it's not equal it jumps to this adress 0x8049810.
-The goal is to have this comparison true then we will have succeded.
-To achieve this we have to change the value at 0x8049810 using printf.
+Ici c'est interessant, nous faisons une comparaison et si la comparaison est fausse on part à l'adresse de sortie 0x8049810. L'objectif est de rendre cette comparaison vrai. Pour le faire nous changerons la valeur de cette adresse  0x8049810 en utilisant printf.
 La seule différence est qu'ici, la comparaison se fait avec un chiffre en "dur" :
 0x8049810 -> decimal :16930116
 
