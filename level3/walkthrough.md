@@ -17,16 +17,16 @@ Qui elle même appelle printf, qui peut être exploitée.
  80484d2:	89 04 24             	mov    DWORD PTR [esp],eax
  80484d5:	e8 b6 fe ff ff       	call   8048390 <printf@plt>
 ```
- This prints the pointer passed as first argument on fgets() (printf(eax)).
+Le printf print la string rentré en argument rentrée par fgets fgets() (printf(eax)).
 
 ```
  80484da:	a1 8c 98 04 08       	mov    eax,ds:0x804988c
  80484df:	83 f8 40             	cmp    eax,0x40
  80484e2:	75 34                	jne    8048518 <v+0x74>
 ```
-This part is intersting, it makes a comparison, in case it's not equal it jumps to this adress 0x8048518.
-The goal is to have this comparison true then we will have succeded.
-To achieve this we have to change the value at 0x804988c using printf.
+Ici c'est interessant, nous faisons une comparaison et si la comparaison est fausse on part à l'adresse de sortie 0x8048518.
+L'objectif est de rendre cette comparaison vrai.
+Pour le faire nous changerons la valeur de cette adresse 0x804988c en utilisant printf.
 
 Trouvons notre offset, nous chercherons la valeur ascii de "a" soit 61:
 ```
